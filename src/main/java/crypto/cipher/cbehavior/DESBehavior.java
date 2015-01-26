@@ -1,5 +1,10 @@
 package crypto.cipher.cbehavior;
 
+/**
+ * This class defines the behavior of the encryption technique known as the Data Encryption Standard (DES).
+ * @author Christian Janeczek
+ * @version 26.01.2015
+ */
 public class DESBehavior implements CipherBehavior {
 
 

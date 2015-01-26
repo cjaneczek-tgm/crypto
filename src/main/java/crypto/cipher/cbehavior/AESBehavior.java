@@ -1,7 +1,11 @@
 package crypto.cipher.cbehavior;
 
+/**
+ * This class defines the behavior of the encryption technique known as the Advanced Encryption Standard (AES).
+ * @author Christian Janeczek
+ * @version 26.01.2015
+ */
 public class AESBehavior implements CipherBehavior {
-
 
 	/**
 	 * @see crypto.cipher.cbehavior.CipherBehavior#encryptString(java.lang.String, java.lang.String)
@@ -10,14 +14,12 @@ public class AESBehavior implements CipherBehavior {
 		return null;
 	}
 
-
 	/**
 	 * @see crypto.cipher.cbehavior.CipherBehavior#decryptString(java.lang.String, java.lang.String)
 	 */
 	public String decryptString(String text, String key) {
 		return null;
 	}
-
 
 	/**
 	 * @see crypto.cipher.cbehavior.CipherBehavior#generateKey()
