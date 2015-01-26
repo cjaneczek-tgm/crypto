@@ -9,36 +9,30 @@ public class Server {
 	private int port;
 	private CipherBehavior cipherBehavior;
 
-	public Server(String privateKey, String publicKey, String sharedKey, int port, CipherBehavior cipherBehavior){
-		this.privateKey = privateKey;
-		this.publicKey = publicKey;
-		this.sharedKey = sharedKey;
+	public Server(int port, CipherBehavior cipherBehavior){
 		this.port = port;
 		this.cipherBehavior = cipherBehavior;
-
 	}
 
 	/**
 	 * @see crypto.cipher.cbehavior.CipherBehavior#encryptString(java.lang.String, java.lang.String)
 	 */
 	public String encryptString(String text, String key) {
-		return null;
+		return this.cipherBehavior.encryptString(text, key);
 	}
-
 
 	/**
 	 * @see crypto.cipher.cbehavior.CipherBehavior#decryptString(java.lang.String, java.lang.String)
 	 */
 	public String decryptString(String text, String key) {
-		return null;
+		return this.cipherBehavior.encryptString(text, key);
 	}
-
 
 	/**
 	 * @see crypto.cipher.cbehavior.CipherBehavior#generateKey()
 	 */
-	public void generateKey() {
-
+	public void generatePairedKey() {
+		//TODO Generating the Paired Key, Wolfgang will know :)
 	}
 
 	public String getPrivateKey() {

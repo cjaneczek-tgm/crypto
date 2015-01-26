@@ -8,21 +8,21 @@ package crypto.cipher.cbehavior;
 public class AESBehavior implements CipherBehavior {
 
 	/**
-	 * @see crypto.cipher.cbehavior.CipherBehavior#encryptString(java.lang.String, java.lang.String)
+	 * AES happens
 	 */
 	public String encryptString(String text, String key) {
 		return null;
 	}
 
 	/**
-	 * @see crypto.cipher.cbehavior.CipherBehavior#decryptString(java.lang.String, java.lang.String)
+	 * AES happens
 	 */
 	public String decryptString(String text, String key) {
 		return null;
 	}
 
 	/**
-	 * @see crypto.cipher.cbehavior.CipherBehavior#generateKey()
+	 * AES Key-generation
 	 */
 	public void generateKey() {
 

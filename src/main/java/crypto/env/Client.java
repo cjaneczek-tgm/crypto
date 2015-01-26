@@ -9,10 +9,14 @@ public class Client {
     private int serverPort;
     private CipherBehavior cipherBehavior;
 
-    public Client(String serverName, String publicKey, String sharedKey, int serverPort, CipherBehavior cipherBehavior){
+    /**
+     * The Client constructor with the insecure plain-text transmission
+     * @param serverName The server's address
+     * @param serverPort The server's port
+     * @param cipherBehavior The specified behavior of the cipher
+     */
+    public Client(String serverName, int serverPort, CipherBehavior cipherBehavior){
         this.serverName = serverName;
-        this.publicKey = publicKey;
-        this.sharedKey = sharedKey;
         this.serverPort = serverPort;
         this.cipherBehavior = cipherBehavior;
     }
@@ -21,22 +25,21 @@ public class Client {
      * @see crypto.cipher.cbehavior.CipherBehavior#encryptString(java.lang.String, java.lang.String)
      */
     public String encryptString(String text, String key) {
-        return null;
+        return this.cipherBehavior.encryptString(text,key);
     }
 
     /**
      * @see crypto.cipher.cbehavior.CipherBehavior#decryptString(java.lang.String, java.lang.String)
      */
     public String decryptString(String text, String key) {
-        return null;
+        return this.cipherBehavior.decryptString(text,key);
     }
-
 
     /**
      * @see crypto.cipher.cbehavior.CipherBehavior#generateKey()
      */
-    public void generateKey() {
-
+    public void generateSharedKey() {
+        //TODO The key-generation is missing... for now!
     }
 
     public String getServerName() {
