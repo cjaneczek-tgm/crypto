@@ -2,14 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f2fc25a9-c128-4b94-b7b3-d475b33e2705" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/crypto/cipher/cbehavior/AESBehavior.java" afterPath="$PROJECT_DIR$/src/main/java/crypto/cipher/cbehavior/AESBehavior.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/crypto/cipher/cbehavior/CipherBehavior.java" afterPath="$PROJECT_DIR$/src/main/java/crypto/cipher/cbehavior/CipherBehavior.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/crypto/env/Client.java" afterPath="$PROJECT_DIR$/src/main/java/crypto/env/Client.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/crypto/com/ComSocket.java" afterPath="$PROJECT_DIR$/src/main/java/crypto/com/ComSocket.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/crypto/cipher/cbehavior/DESBehavior.java" afterPath="$PROJECT_DIR$/src/main/java/crypto/cipher/cbehavior/DESBehavior.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/crypto/cipher/cbehavior/RSABehavior.java" afterPath="$PROJECT_DIR$/src/main/java/crypto/cipher/cbehavior/RSABehavior.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/crypto/env/Server.java" afterPath="$PROJECT_DIR$/src/main/java/crypto/env/Server.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/crypto/env/start/StartEncryption.java" afterPath="$PROJECT_DIR$/src/main/java/crypto/env/start/StartEncryption.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Cryptography.iws" />
@@ -944,7 +936,7 @@
       <option name="number" value="Default" />
       <updated>1422277464410</updated>
       <workItem from="1422277464942" duration="1028000" />
-      <workItem from="1422278659597" duration="2874000" />
+      <workItem from="1422278659597" duration="2986000" />
     </task>
     <task id="LOCAL-00001" summary="Adjusted gradle for further use">
       <created>1422277794925</created>
@@ -964,11 +956,17 @@
       <option name="project" value="LOCAL" />
       <updated>1422283149479</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Class Documentations + Constructor for Client and Server">
+      <created>1422284251420</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1422284251420</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3902000" />
+    <option name="totallyTimeSpent" value="4014000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
@@ -987,7 +985,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1855615" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1855615" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15347594" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1022,7 +1020,8 @@
     <MESSAGE value="Adjusted gradle for further use" />
     <MESSAGE value="Renamed the project" />
     <MESSAGE value="Generated Astah Code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Generated Astah Code" />
+    <MESSAGE value="Class Documentations + Constructor for Client and Server" />
+    <option name="LAST_COMMIT_MESSAGE" value="Class Documentations + Constructor for Client and Server" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
