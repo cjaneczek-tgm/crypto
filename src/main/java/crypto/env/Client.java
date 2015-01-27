@@ -3,7 +3,7 @@ package crypto.env;
 import crypto.com.ComSocket;
 import crypto.cipher.cbehavior.CipherBehavior;
 
-public class Client {
+public class Client implements Runnable{
 
     private String serverName, publicKey, sharedKey;
     private int serverPort;
@@ -20,6 +20,13 @@ public class Client {
         this.serverPort = serverPort;
         this.cipherBehavior = cipherBehavior;
     }
+
+
+    @Override
+    public void run() {
+
+    }
+
 
     /**
      * @see crypto.cipher.cbehavior.CipherBehavior#encryptString(java.lang.String, java.lang.String)
@@ -81,4 +88,6 @@ public class Client {
     public void setCipherBehavior(CipherBehavior cipherBehavior) {
         this.cipherBehavior = cipherBehavior;
     }
+
+
 }

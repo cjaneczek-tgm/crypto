@@ -1,4 +1,7 @@
 package crypto.cipher.cbehavior;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * This class defines the behavior of the encryption technique known as the Rivest-Shamir-Adleman Algorithm (RSA).
@@ -24,8 +27,16 @@ public class RSABehavior implements CipherBehavior {
 	/**
 	 * @see crypto.cipher.cbehavior.CipherBehavior#generateKey()
 	 */
-	public void generateKey() {
-
+	public KeyPair generateKey() {
+		try {
+			KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
+			kpg.initialize(2048);
+			KeyPair kp = kpg.genKeyPair();
+			return kp;
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

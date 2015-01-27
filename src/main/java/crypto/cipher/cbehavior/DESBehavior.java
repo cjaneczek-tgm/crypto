@@ -1,5 +1,7 @@
 package crypto.cipher.cbehavior;
 
+import java.security.KeyPair;
+
 /**
  * This class defines the behavior of the encryption technique known as the Data Encryption Standard (DES).
  * @author Christian Janeczek
@@ -27,7 +29,7 @@ public class DESBehavior implements CipherBehavior {
 	/**
 	 * @see crypto.cipher.cbehavior.CipherBehavior#generateKey()
 	 */
-	public void generateKey() {
+	public KeyPair generateKey() {
 
 	}
 

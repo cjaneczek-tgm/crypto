@@ -3,7 +3,9 @@ package crypto.env;
 import crypto.com.ComSocket;
 import crypto.cipher.cbehavior.CipherBehavior;
 
-public class Server {
+import java.security.KeyPair;
+
+public class Server implements Runnable{
 
 	private String privateKey, publicKey, sharedKey;
 	private int port;
@@ -13,6 +15,13 @@ public class Server {
 		this.port = port;
 		this.cipherBehavior = cipherBehavior;
 	}
+
+
+	@Override
+	public void run() {
+
+	}
+
 
 	/**
 	 * @see crypto.cipher.cbehavior.CipherBehavior#encryptString(java.lang.String, java.lang.String)
@@ -31,8 +40,8 @@ public class Server {
 	/**
 	 * @see crypto.cipher.cbehavior.CipherBehavior#generateKey()
 	 */
-	public void generatePairedKey() {
-		//TODO Generating the Paired Key, Wolfgang will know :)
+	public KeyPair generatePairedKey() {
+		return cipherBehavior.generateKey();
 	}
 
 	public String getPrivateKey() {
@@ -74,4 +83,6 @@ public class Server {
 	public void setCipherBehavior(CipherBehavior cipherBehavior) {
 		this.cipherBehavior = cipherBehavior;
 	}
+
+
 }
