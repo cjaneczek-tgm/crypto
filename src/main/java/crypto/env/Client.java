@@ -24,7 +24,7 @@ public class Client implements Runnable{
 
     @Override
     public void run() {
-
+        //TODO run()-method declaration missing
     }
 
 

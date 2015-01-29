@@ -31,8 +31,7 @@ public class RSABehavior implements CipherBehavior {
 		try {
 			KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
 			kpg.initialize(2048);
-			KeyPair kp = kpg.genKeyPair();
-			return kp;
+			return kpg.genKeyPair();
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}

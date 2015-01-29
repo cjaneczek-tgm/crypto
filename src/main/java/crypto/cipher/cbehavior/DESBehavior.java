@@ -30,7 +30,7 @@ public class DESBehavior implements CipherBehavior {
 	 * @see crypto.cipher.cbehavior.CipherBehavior#generateKey()
 	 */
 	public KeyPair generateKey() {
-
+        return null;
 	}
 
 }

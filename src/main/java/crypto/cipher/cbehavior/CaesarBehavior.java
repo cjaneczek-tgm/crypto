@@ -28,10 +28,10 @@ public class CaesarBehavior implements CipherBehavior {
             this.indexKey = Integer.parseInt(key);
         }
         catch(NumberFormatException nfe){
-
+            nfe.printStackTrace();
         }
         catch(NullPointerException npe){
-
+            npe.printStackTrace();
         }
 
         String s = "";
@@ -63,10 +63,10 @@ public class CaesarBehavior implements CipherBehavior {
             this.indexKey = Integer.parseInt(key);
         }
         catch(NumberFormatException nfe){
-
+            nfe.printStackTrace();
         }
         catch(NullPointerException npe){
-
+            npe.printStackTrace();
         }
 
         String s = "";
