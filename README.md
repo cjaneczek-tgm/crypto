@@ -14,6 +14,9 @@ Gruppengröße: 2 Mitglieder
 Punkte: 16
 
 Erzeugen von Schlüsseln: 4 Punkte
+
 Verschlüsselte Übertragung: 4 Punkte
+
 Entschlüsseln der Nachricht: 4 Punkte
+
 Sniffer: 4 Punkte
