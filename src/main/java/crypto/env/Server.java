@@ -3,7 +3,16 @@ package crypto.env;
 import crypto.com.ComSocket;
 import crypto.cipher.cbehavior.CipherBehavior;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.SocketException;
+import java.security.Key;
 import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
 
 public class Server implements Runnable{
 
@@ -19,29 +28,107 @@ public class Server implements Runnable{
 
 	@Override
 	public void run() {
-        //TODO run()-method declaration missing
+        try {
+            ServerSocket serverSocket = new ServerSocket(port);
+
+            System.out.println("Waiting for client");
+            Socket client = serverSocket.accept();
+
+            ObjectInputStream ois = new ObjectInputStream(
+                    client.getInputStream());
+            ObjectOutputStream oos = new ObjectOutputStream(
+                    client.getOutputStream());
+
+            MessageTransmitter mt = new MessageTransmitter(client, oos, ois);
+
+            boolean running = true;
+
+            while (running) {
+
+                // convert ObjectInputStream object to String
+                String message = "";
+                try {
+                    message = (String) ois.readObject();
+                } catch (ClassNotFoundException e) {
+                    System.out.println("Client disconnected!");
+                }
+                System.out.println("DEBUG: Message Received: " + message);
+
+                String[] split = message.split("/", 2);
+                String mode = split[0];
+                String text = split[1];
+
+                if (mode.equals("plain")) {
+                    System.out.println("Plaintext Message Received! Content: "
+                            + text);
+
+                } else if (mode.equals("key")) {
+
+                    System.out.println("Receiving Key...");
+                    // Session creation
+                    clientPuK = CryptoToolkit.get().decodePubK(text);
+
+                    System.out.println("Public Key received: " + clientPuK);
+
+                    //Generate and store key
+                    sharedKey = CryptoToolkit.get().genKey("AES");
+
+                    //Encode key for transmission
+                    String encodedKey = Base64.getEncoder().encodeToString(sessionKey.getEncoded());
+                    System.out.println("Encoded Key: " + encodedKey);
+
+                    String toSend = CryptoToolkit.get().encrypt(encodedKey, clientPuK, "RSA");
+
+                    mt.sendMessage("key/" + toSend);
+
+                } else if (mode.equals("secure")) {
+
+                    if(clientPuK == null){
+                        System.out.println("Generate a key first!");
+                    }else{
+                        System.out.println("Secure Message received: " + CryptoToolkit.get().decrypt(text, sessionKey, "AES"));
+                    }
+
+                } else {
+                    // This message is using the wrong protocol or an attack
+                }
+
+            }
+
+            // close resources
+            mt.close(); //also closes oos, ois and socket
+            serverSocket.close();
+        } catch (SocketException se) {
+            System.out.println("Client disconnected!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 	}
 
 
-	/**
-	 * @see crypto.cipher.cbehavior.CipherBehavior#encryptString(java.lang.String, java.lang.String)
-	 */
-	public String encryptString(String text, String key) {
-		return this.cipherBehavior.encryptString(text, key);
+	public String encryptString(String text, Key key, String alg) {
+		return this.cipherBehavior.encryptString(text, key, alg);
 	}
 
-	/**
-	 * @see crypto.cipher.cbehavior.CipherBehavior#decryptString(java.lang.String, java.lang.String)
-	 */
-	public String decryptString(String text, String key) {
-		return this.cipherBehavior.encryptString(text, key);
+
+	public String decryptString(String text, Key key, String alg) {
+		return this.cipherBehavior.encryptString(text, key, alg);
 	}
 
-	/**
-	 * @see crypto.cipher.cbehavior.CipherBehavior#generateKey()
-	 */
+
 	public KeyPair generatePairedKey() {
-		return cipherBehavior.generateKey();
+        // RSA key generation
+        KeyPairGenerator keyGen = null;
+        try {
+            keyGen = KeyPairGenerator
+                    .getInstance("RSA");
+        } catch (NoSuchAlgorithmException e) {
+
+        }
+        keyGen.initialize(1024);
+
+       return keyGen.generateKeyPair();
+
 	}
 
 	public String getPrivateKey() {

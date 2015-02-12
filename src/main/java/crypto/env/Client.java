@@ -28,23 +28,17 @@ public class Client implements Runnable{
     }
 
 
-    /**
-     * @see crypto.cipher.cbehavior.CipherBehavior#encryptString(java.lang.String, java.lang.String)
-     */
+
     public String encryptString(String text, String key) {
         return this.cipherBehavior.encryptString(text,key);
     }
 
-    /**
-     * @see crypto.cipher.cbehavior.CipherBehavior#decryptString(java.lang.String, java.lang.String)
-     */
+
     public String decryptString(String text, String key) {
         return this.cipherBehavior.decryptString(text,key);
     }
 
-    /**
-     * @see crypto.cipher.cbehavior.CipherBehavior#generateKey()
-     */
+
     public void generateSharedKey() {
         //TODO The key-generation is missing... for now!
     }

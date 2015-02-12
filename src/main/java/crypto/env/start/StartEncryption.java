@@ -21,7 +21,7 @@ public class StartEncryption {
         AESBehavior aesBehavior = new AESBehavior();
 
         String message = "Hello, I am a message!";
-        String key = aesBehavior.generateKey().toString();
+        String key = "12h$hjjj%&AVAX000000000000000000000000000000000000000000000000000000000000000000000000000AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
         logger.info("Message: '"+message+"'");
         logger.info("Key: "+key);
         logger.info(aesBehavior.encryptString(message, key));

@@ -1,5 +1,6 @@
 package crypto.cipher.cbehavior;
 
+import java.security.Key;
 import java.security.KeyPair;
 
 /**
@@ -8,10 +9,10 @@ import java.security.KeyPair;
  */
 public abstract interface CipherBehavior {
 
-	public String encryptString(String text, String key);
+	public String encryptString(String text, Key key, String alg);
 
-	public String decryptString(String text, String key);
+	public String decryptString(String text, Key key, String alg);
 
-	public KeyPair generateKey();
+	public Key generateKey(String alg);
 
 }
