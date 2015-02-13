@@ -9,10 +9,10 @@ import java.security.KeyPair;
  */
 public abstract interface CipherBehavior {
 
-	public String encryptString(String text, Key key, String alg);
+	public String encryptString(String text, Key key);
 
-	public String decryptString(String text, Key key, String alg);
+	public String decryptString(String text, Key key);
 
-	public Key generateKey(String alg);
+	public Key generateKey();
 
 }

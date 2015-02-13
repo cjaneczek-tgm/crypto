@@ -1,5 +1,6 @@
 package crypto.cipher.cbehavior;
 
+import java.security.Key;
 import java.security.KeyPair;
 
 /**
@@ -22,10 +23,10 @@ public class CaesarBehavior implements CipherBehavior {
      * @param key The shift amount as a String
      * @return   The shifted Text
      */
-    public String encryptString(String text, String key) {
+    public String encryptString(String text, Key key) {
 
         try{
-            this.indexKey = Integer.parseInt(key);
+            this.indexKey = Integer.parseInt(key.toString());
         }
         catch(NumberFormatException nfe){
             nfe.printStackTrace();
@@ -57,10 +58,10 @@ public class CaesarBehavior implements CipherBehavior {
      * @param key The shift amount as a String
      * @return   The shifted Text
      */
-    public String decryptString(String text, String key) {
+    public String decryptString(String text, Key key) {
 
         try{
-            this.indexKey = Integer.parseInt(key);
+            this.indexKey = Integer.parseInt(key.toString());
         }
         catch(NumberFormatException nfe){
             nfe.printStackTrace();
@@ -85,10 +86,7 @@ public class CaesarBehavior implements CipherBehavior {
         return s;
     }
 
-    /**
-     * @see crypto.cipher.cbehavior.CipherBehavior#generateKey()
-     */
-    public KeyPair generateKey() {
+    public Key generateKey() {
         return null;
     }
 

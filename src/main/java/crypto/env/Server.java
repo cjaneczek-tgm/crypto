@@ -1,7 +1,8 @@
 package crypto.env;
 
+import crypto.cipher.cbehavior.AESBehavior;
 import crypto.com.ComSocket;
-import crypto.cipher.cbehavior.CipherBehavior;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -10,28 +11,33 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.security.Key;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.NoSuchAlgorithmException;
+import java.security.PublicKey;
+import java.util.Base64;
 
-public class Server implements Runnable{
+/**
+ * The following arguments are required: port
+ *
+ * @author Christian Janeczek, Wolfgang Mair
+ * @version 2015-02-12
+ */
+public class Server {
 
-	private String privateKey, publicKey, sharedKey;
-	private int port;
-	private CipherBehavior cipherBehavior;
+    public static void main(String[] args) {
 
-	public Server(int port, CipherBehavior cipherBehavior){
-		this.port = port;
-		this.cipherBehavior = cipherBehavior;
-	}
+        Logger logger = org.apache.log4j.Logger.getLogger(Server.class);
+        if (args.length != 1) {
+            logger.info("Invalid arguments");
+            System.exit(0);
+        }
+        int port = Integer.parseInt(args[0]);
 
+        PublicKey clientPuK = null;
+        Key sessionKey = null;
 
-	@Override
-	public void run() {
         try {
             ServerSocket serverSocket = new ServerSocket(port);
 
-            System.out.println("Waiting for client");
+            logger.info("Server is ready and waiting for the client...");
             Socket client = serverSocket.accept();
 
             ObjectInputStream ois = new ObjectInputStream(
@@ -39,7 +45,7 @@ public class Server implements Runnable{
             ObjectOutputStream oos = new ObjectOutputStream(
                     client.getOutputStream());
 
-            MessageTransmitter mt = new MessageTransmitter(client, oos, ois);
+            ComSocket mt = new ComSocket(client, oos, ois);
 
             boolean running = true;
 
@@ -50,47 +56,48 @@ public class Server implements Runnable{
                 try {
                     message = (String) ois.readObject();
                 } catch (ClassNotFoundException e) {
-                    System.out.println("Client disconnected!");
+                    logger.info("Client dismissed!");
                 }
-                System.out.println("DEBUG: Message Received: " + message);
+                logger.info("The message was successfully received: " + message);
 
                 String[] split = message.split("/", 2);
                 String mode = split[0];
                 String text = split[1];
 
                 if (mode.equals("plain")) {
-                    System.out.println("Plaintext Message Received! Content: "
+                    logger.info("The message was successfully received: "
                             + text);
 
                 } else if (mode.equals("key")) {
 
-                    System.out.println("Receiving Key...");
+                    logger.info("The key is being received...");
                     // Session creation
-                    clientPuK = CryptoToolkit.get().decodePubK(text);
+                    clientPuK = AESBehavior.get().decodePubK(text);
 
-                    System.out.println("Public Key received: " + clientPuK);
+                    logger.info("The public key PK is being received: " + clientPuK);
 
                     //Generate and store key
-                    sharedKey = CryptoToolkit.get().genKey("AES");
+                    sessionKey = AESBehavior.get().genKey("AES");
 
                     //Encode key for transmission
                     String encodedKey = Base64.getEncoder().encodeToString(sessionKey.getEncoded());
-                    System.out.println("Encoded Key: " + encodedKey);
+                    logger.info("The encoded key: " + encodedKey);
 
-                    String toSend = CryptoToolkit.get().encrypt(encodedKey, clientPuK, "RSA");
+                    String toSend = AESBehavior.get().encryptString(encodedKey, clientPuK, "RSA");
 
                     mt.sendMessage("key/" + toSend);
 
                 } else if (mode.equals("secure")) {
 
                     if(clientPuK == null){
-                        System.out.println("Generate a key first!");
+                        logger.info("To use the secure transmission, you have to generate a key first!");
                     }else{
-                        System.out.println("Secure Message received: " + CryptoToolkit.get().decrypt(text, sessionKey, "AES"));
+                        logger.info("The secure message was successfully received: " + AESBehavior.get().decryptString(text, sessionKey, "AES"));
+                        logger.info("Server is now shutting down... Thanks for using me!");
+                        System.exit(0);
                     }
 
                 } else {
-                    // This message is using the wrong protocol or an attack
                 }
 
             }
@@ -99,77 +106,13 @@ public class Server implements Runnable{
             mt.close(); //also closes oos, ois and socket
             serverSocket.close();
         } catch (SocketException se) {
-            System.out.println("Client disconnected!");
+            logger.info("Client dismissed!");
         } catch (IOException e) {
             e.printStackTrace();
         }
-	}
+        System.exit(0);
+    }
 
-
-	public String encryptString(String text, Key key, String alg) {
-		return this.cipherBehavior.encryptString(text, key, alg);
-	}
-
-
-	public String decryptString(String text, Key key, String alg) {
-		return this.cipherBehavior.encryptString(text, key, alg);
-	}
-
-
-	public KeyPair generatePairedKey() {
-        // RSA key generation
-        KeyPairGenerator keyGen = null;
-        try {
-            keyGen = KeyPairGenerator
-                    .getInstance("RSA");
-        } catch (NoSuchAlgorithmException e) {
-
-        }
-        keyGen.initialize(1024);
-
-       return keyGen.generateKeyPair();
-
-	}
-
-	public String getPrivateKey() {
-		return privateKey;
-	}
-
-	public void setPrivateKey(String privateKey) {
-		this.privateKey = privateKey;
-	}
-
-	public String getPublicKey() {
-		return publicKey;
-	}
-
-	public void setPublicKey(String publicKey) {
-		this.publicKey = publicKey;
-	}
-
-	public String getSharedKey() {
-		return sharedKey;
-	}
-
-	public void setSharedKey(String sharedKey) {
-		this.sharedKey = sharedKey;
-	}
-
-	public int getPort() {
-		return port;
-	}
-
-	public void setPort(int port) {
-		this.port = port;
-	}
-
-	public CipherBehavior getCipherBehavior() {
-		return cipherBehavior;
-	}
-
-	public void setCipherBehavior(CipherBehavior cipherBehavior) {
-		this.cipherBehavior = cipherBehavior;
-	}
 
 
 }

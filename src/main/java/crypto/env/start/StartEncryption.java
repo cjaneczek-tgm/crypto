@@ -1,30 +1,30 @@
 package crypto.env.start;
 
 import crypto.cipher.cbehavior.AESBehavior;
+import crypto.env.Client;
+import crypto.env.Server;
 import org.apache.log4j.Logger;
+
+import java.security.Key;
 
 public class StartEncryption {
 
 	public static void main(String[] args) {
 
         Logger logger = org.apache.log4j.Logger.getLogger(StartEncryption.class);
-//		String pseudoServerName = "localhost";
-//		String pseudoPublicKey = "01001010101";
-//		String pseudoSharedKey = "10110101001";
-//		KeyPair keyPair;
-//
-//		int pseudoServerPort = 8080;
-//		Server server = new Server(8080, new AESBehavior());
-//		Client client = new Client(pseudoServerName, pseudoServerPort, new AESBehavior());
-//		keyPair = server.generatePairedKey();
-//		server.encryptString(server.getPublicKey(),keyPair.getPublic().toString());
         AESBehavior aesBehavior = new AESBehavior();
 
-        String message = "Hello, I am a message!";
-        String key = "12h$hjjj%&AVAX000000000000000000000000000000000000000000000000000000000000000000000000000AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
-        logger.info("Message: '"+message+"'");
-        logger.info("Key: "+key);
-        logger.info(aesBehavior.encryptString(message, key));
-
+//        String[] clientArgs = {"127.0.0.1","202","secure"};
+//        String[] serverArgs = {"202"};
+//        Server.main(serverArgs);
+//        Client.main(clientArgs);
+//        String message = "Hello, I am a message!";
+//        Key key = aesBehavior.generateKey();
+//        logger.info("Message: '"+message+"'");
+//        logger.info("Key: "+key);
+//        String encrypted = aesBehavior.encryptString(message, key);
+//        logger.info(encrypted);
+//        String decrypted = aesBehavior.decryptString(encrypted, key);
+//        logger.info(decrypted);
 	}
 }
