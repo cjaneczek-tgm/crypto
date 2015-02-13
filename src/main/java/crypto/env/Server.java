@@ -67,6 +67,7 @@ public class Server {
                 if (mode.equals("plain")) {
                     logger.info("The message was successfully received: "
                             + text);
+                    System.exit(0);
 
                 } else if (mode.equals("key")) {
 

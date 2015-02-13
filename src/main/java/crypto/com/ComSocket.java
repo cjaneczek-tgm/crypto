@@ -1,5 +1,7 @@
 package crypto.com;
 
+import org.apache.log4j.Logger;
+
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -13,6 +15,7 @@ import java.net.Socket;
  */
 public class ComSocket implements Closeable{
 
+    Logger logger = org.apache.log4j.Logger.getLogger(ComSocket.class);
     private Socket socket;
     private ObjectOutputStream oos;
     private ObjectInputStream ois;
@@ -25,7 +28,7 @@ public class ComSocket implements Closeable{
             ois = new ObjectInputStream(socket.getInputStream());
 
         } catch (IOException e) {
-            System.out.println("Server not reached");
+            logger.info("Server not reached");
         }
     }
 
@@ -41,11 +44,11 @@ public class ComSocket implements Closeable{
      */
     public void sendMessage(String message) {
         try {
-            System.out.println("Sending message: " + message);
+            logger.info("Sending message: " + message);
             oos.writeObject(message);
-            System.out.println("Message sent");
+            logger.info("Message sent");
         } catch (IOException e) {
-            System.out.println("Error at sending message");
+            logger.info("Error at sending message");
         }
     }
 
